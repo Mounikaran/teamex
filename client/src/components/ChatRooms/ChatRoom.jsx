@@ -129,9 +129,9 @@ const ChatRoom = () => {
                 return (
                     <div key={index} className="chatroom__message">
                         <div className="mychat">
-                            <span>{moment(message.timestamp).format("DD/MM, hh:mm")}</span>
                             <img src={message.body} alt="" style={{ width: 250, height: "auto" }} />
                             <p key={index}>{message.message}</p>
+                            <span>{moment(message.timestamp).format("DD/MM, hh:mm")}</span>
                         </div>
                     </div>
                 );
@@ -154,8 +154,8 @@ const ChatRoom = () => {
                 return (
                     <div key={index} className="chatroom__message">
                         <div className="mychat">
-                            <span>{moment(message.timestamp).format("DD/MM, hh:mm")}</span>
                             <p key={index}>{message.message}</p>
+                            <span className='mychat_time'>{moment(message.timestamp).format("DD/MM, hh:mm")}</span>
                         </div>
                     </div>
                 );
@@ -165,9 +165,9 @@ const ChatRoom = () => {
                     <div className="peerchat">
                         <Avatar alt={message.sender.charAt(0)}>{message.sender.charAt(0)}</Avatar>
                         <div className="peer">
-                            <span>{message.sender}</span>
-                            <span>{moment(message.timestamp).format("DD/MM, hh:mm")}</span>
+                            {/* <span>{message.sender}</span> */}
                             <p key={index}>{message.message}</p>
+                            <span>{moment(message.timestamp).format("DD/MM, hh:mm")}</span>
                         </div>
                     </div>
                 </div>
@@ -186,11 +186,11 @@ const ChatRoom = () => {
                     <div className="chatroom__headerleft">
                         <Avatar>{event.Subject.charAt(0)}</Avatar>
                         {event ? <h5>{event.Subject}</h5> : <h5>Teams Clone Chat</h5>}
-                        <Tooltip title="Edit">
+                        {/* <Tooltip title="Edit">
                             <IconButton>
                                 <CreateIcon />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                     </div>
                     <div className="chatroom__headerright">
                         <Link to={`/room/${roomId}`} target="_blank">
@@ -231,11 +231,11 @@ const ChatRoom = () => {
                     <div className="chatroom__headerleft">
                         <Avatar>{conversation.Subject.charAt(0)}</Avatar>
                         {conversation ? <h5>{conversation.Subject}</h5> : <h5>Teams Clone Chat</h5>}
-                        <Tooltip title="Edit">
+                        {/* <Tooltip title="Edit">
                             <IconButton>
                                 <CreateIcon />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                     </div>
                     <div className="chatroom__headerright">
                         <Link to={`/room/${roomId}/1`} target="_blank">

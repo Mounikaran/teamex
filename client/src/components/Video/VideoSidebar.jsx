@@ -80,7 +80,7 @@ const VideoSidebar = () => {
                     hoverIcon="https://img.icons8.com/ios/36/6264A7/video-conference.png"
                 />
             </div>
-            <div onClick={() => {openGitHub()}}>
+            {/* <div onClick={() => {openGitHub()}}>
             {auth ?
                 <SidebarItem 
                     icon="https://img.icons8.com/ios/36/000000/github--v1.png"
@@ -101,7 +101,7 @@ const VideoSidebar = () => {
                     />
                 </LoginGithub>
             }
-            </div>
+            </div> */}
             <div onClick={() => {openBoard()}}>
                 <SidebarItem 
                     icon="https://img.icons8.com/ios/36/000000/whiteboard.png"
@@ -109,8 +109,8 @@ const VideoSidebar = () => {
                     hoverIcon="https://img.icons8.com/ios-filled/36/6264A7/whiteboard.png"
                 />
             </div>
-            <div>
-                <CopyToClipboard text={type ? `https://teams-clone-client.netlify.app/room/${roomId}/${type}` : `https://teams-clone-client.netlify.app/room/${roomId}`}>
+            {/* <div>
+                <CopyToClipboard text={type ? `http://localhost:3000/room/${roomId}/${type}` : `http://localhost:3000/room/${roomId}`}>
                     <div onClick={() => {handleClick()}}>
                         <SidebarItem 
                             icon="https://img.icons8.com/ios-filled/50/000000/share--v1.png"
@@ -124,10 +124,10 @@ const VideoSidebar = () => {
                         Meeting link copied to clipboard!
                     </Alert>
                 </Snackbar>
-            </div>
-            <div className="sidebarItem">
+            </div> */}
+            {/* <div className="sidebarItem">
                 <MoreHorizIcon />
-            </div>
+            </div> */}
         </div>
     )
 }

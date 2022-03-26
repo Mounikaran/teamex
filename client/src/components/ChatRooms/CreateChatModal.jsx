@@ -27,14 +27,15 @@ const CreateChatModal = (props) => {
 
     const selectParticipants = (participants) => {
         setAttendees(participants);
+        console.log(participants)
         var i = 0, name = '';
         if (participants.length > 1) {
             for (i = 0; i < participants.length; i++) {
-                name += participants[i].label + ', ';
+                name += participants[i]?.label + ', ';
             }
-            name += 'and ' + currentUser.result.name;
+            name += ', ' + currentUser.result.name;
         } else {
-            name = participants[0] + ' and ' + currentUser.result.name;
+            name = participants[0]?.label + ', ' + currentUser.result.name;
         }
         setGroupName(name);
     }

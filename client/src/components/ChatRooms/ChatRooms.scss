@@ -170,25 +170,30 @@
         width: fit-content;
         margin-right: 7%;
         background-color: #D7D7E9;
-        padding: 0.1px 10px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        border-radius: 15px;
+        border-radius: 20px;
+        padding : 2px 15px;
     }
 
     .mychat > span {
         font-size: 10px !important;
         font-weight: 500;
-        padding: 7px;
+        text-align: right;
     }
 
     .mychat > span {
         font-size: 12px;
-        padding: 3px;
+    }
+    .mychat > p{
+        margin-bottom: 0px;
+        font-size: 15px;
+    }
+    .mychat_time{
+        font-size: 12px;
+        text-align: right;
     }
 
     .peerchat {
-        display: flex;
+        // display: flex;
         flex-direction: column;
         width: fit-content;
         margin-left: 3%;
@@ -206,9 +211,13 @@
     .peerchat > .peer {
         margin-left: 10px;
         background-color: #ffffff;
-        padding: 0.1px 10px;
-        margin-top: 5px;
-        border-radius: 15px;
+        padding: 2px 15px;
+        border-radius: 20px;
+    }
+
+    .peer > p {
+        margin-bottom: 0px;
+        font-size: 15px;
     }
 
     .peerchat > div > span {
@@ -220,6 +229,10 @@
     .peerchat > div > span {
         font-size: 12px;
         padding: 3px;
+    }
+    .peerchat > span {
+        font-size: 12px;
+        text-align: left;
     }
 }
 

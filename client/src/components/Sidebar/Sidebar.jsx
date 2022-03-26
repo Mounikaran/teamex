@@ -7,7 +7,7 @@ import chat from '../../assets/chat.svg';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { v1 as uuid } from 'uuid';
 import { getAccessToken } from '../../api/github';
-import LoginGithub from 'react-login-github';
+// import LoginGithub from 'react-login-github';
 import { useDispatch } from 'react-redux';
 import { createEvent } from '../../actions/events';
 import moment from 'moment';
@@ -55,7 +55,7 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-            <Link to={`/room/${videoId}`} target="_blank">
+            {/* <Link to={`/room/${videoId}`} target="_blank">
                 <div onClick={() => {createNewEvent()}}>
                     <SidebarItem 
                         icon="https://img.icons8.com/ios/36/000000/video-conference.png"
@@ -63,7 +63,7 @@ function Sidebar() {
                         hoverIcon="https://img.icons8.com/ios/36/6264A7/video-conference.png"
                     />
                 </div>
-            </Link>
+            </Link> */}
             <Link to="/chat">
                 <SidebarItem
                     icon="https://img.icons8.com/fluent-systems-regular/48/000000/chat-message.png"
@@ -71,7 +71,7 @@ function Sidebar() {
                     hoverIcon={chat}
                 />
             </Link>
-            {auth ?
+            {/* {auth ?
                 <Link to="/github">
                     <SidebarItem
                         icon="https://img.icons8.com/ios/36/000000/github--v1.png"
@@ -94,24 +94,24 @@ function Sidebar() {
                         />
                     </Link>
                 </LoginGithub>
-            }
-            <div onClick={() => {createId()}}>
+            } */}
+            {/* <div onClick={() => {createId()}}>
                 <SidebarItem
                     icon="https://img.icons8.com/ios/36/000000/whiteboard.png"
                     text="Blackboard"
                     hoverIcon="https://img.icons8.com/ios-filled/36/6264A7/whiteboard.png"
                 />
-            </div>
+            </div> */}
             <Link to="/calendar">
                 <SidebarItem
                     icon="https://img.icons8.com/fluent-systems-regular/48/000000/calendar--v1.png"
-                    text="Calendar"
+                    text="Schedule Meeting"
                     hoverIcon={calendar}
                 />
             </Link>
-            <div className="sidebarItem">
+            {/* <div className="sidebarItem">
                 <MoreHorizIcon />
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -76,11 +76,11 @@ const Auth = () => {
 
     return (
         <div className="auth">
-            <h3>Microsoft Teams</h3>
+            {/* <h3>Teamex</h3> */}
             <div className="auth__form">
                 { !isSignup && <img src={teams} alt="" style={{ padding: "5px 0" }} /> }
                 { isSignup && <img src={teams_register} alt="" style={{ height: "200px" }} /> }
-                { !isSignup && <h4>Enter your work, school, or Microsoft account</h4> }
+                {/* { !isSignup && <h4>Enter your Email address</h4> } */}
                 <form onSubmit={handleSubmit}>
                     { isSignup && (
                     <div className="auth__name">
@@ -94,7 +94,7 @@ const Auth = () => {
                     <Button type="submit" fullWidth variant="contained" color="primary" className="submit">
                         { isSignup ? 'Sign Up' : 'Sign In' }
                     </Button>
-                    { isAuthenticated ?
+                    {/* { isAuthenticated ?
                     <Button className="microsoft__login ml-auto" fullWidth variant="contained" onClick={() => handleLogout(instance)}>
                         <img src="https://img.icons8.com/color/48/000000/microsoft.png" alt="" />
                         Sign Out
@@ -103,7 +103,7 @@ const Auth = () => {
                     <Button className="microsoft__login ml-auto" fullWidth variant="contained" onClick={() => handleLogin(instance)}>
                         <img src="https://img.icons8.com/color/48/000000/microsoft.png" alt="" />
                         Sign in with Microsoft
-                    </Button>}
+                    </Button>} */}
                 </form>
                 <Button onClick={switchMode}>
                 { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }

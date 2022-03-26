@@ -5,6 +5,8 @@
     align-items: center;
     background-color: #464775;
 
+    padding: 5px 0px;
+
     .header__logo {
         display: flex;
         flex-direction: row;
@@ -83,4 +85,10 @@
     .header__options > .header__profile:hover {
         background-color: #6264A7;
     }
+}
+
+.frost_grad{
+    background: #000428;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

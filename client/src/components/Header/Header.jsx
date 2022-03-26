@@ -60,10 +60,10 @@ const Header = () => {
     };
 
     return (
-        <div className="header">
+        <div className="header frost_grad">
             <div className="header__logo">
-                <Apps />
-                <h5 className="d-none d-md-block">Microsoft Teams</h5>
+                {/* <Apps /> */}
+                <h5 className="d-none d-md-block">Teamex</h5>
             </div>
             {user ?
                 <div className="header__search">
@@ -72,7 +72,7 @@ const Header = () => {
                 </div>
             : null}
             <div className="header__options">
-                <MoreHorizIcon />
+                {/* <MoreHorizIcon /> */}
                 {user ? (
                     <>
                     <h6>{user.result.name}</h6>

@@ -114,7 +114,7 @@ const Blackboard = () => {
                         <img src="https://img.icons8.com/fluent/48/000000/save-all.png" alt="save canvas" />
                     </Tooltip>
                 </div>
-                <CopyToClipboard text={`https://teams-clone-client.netlify.app/board/${roomId}`}>
+                <CopyToClipboard text={`http://localhost:3000/board/${roomId}`}>
                     <div onClick={() => {handleClick()}}>
                         <Tooltip title="Copy Board Link">
                             <img src="https://img.icons8.com/color/48/000000/share--v1.png" alt="copy invite" />
