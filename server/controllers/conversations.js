@@ -42,6 +42,7 @@ export const postMessage  = async (req, res) => {
 
 export const createConversation  = async (req, res) => {
     const convo = req.body;
+    console.log("Creating Conversation : ", convo)
     const newConversation = new Conversation({ ...convo });
     try {
         await newConversation.save();

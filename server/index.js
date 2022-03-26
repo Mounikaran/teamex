@@ -21,10 +21,12 @@ app.use('/users', usersRoutes);
 app.use('/conversations', conversationRoutes);
 
 app.get('/', (req, res) => {
-    res.send('Hello to Teams Clone API');
+    res.send('Welcome to TeamEx');
 });
 
-const CONNECTION_URL = process.env.CONNECTION_URL;
+// const CONNECTION_URL = process.env.CONNECTION_URL;
+// const CONNECTION_URL = 'mongodb+srv://mounikaran:SURlmhjHvXfAlZjl@cluster0.h3rtf.mongodb.net/Teamex';
+const CONNECTION_URL = 'mongodb+srv://mounikaran:SURlmhjHvXfAlZjl@cluster0.h3rtf.mongodb.net/Teamex?authSource=admin&replicaSet=atlas-f5l2vu-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true';
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

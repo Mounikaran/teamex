@@ -4,6 +4,7 @@ import User from '../models/user.js';
 
 export const signin = async (req, res) => {
     const { email, password } = req.body;
+    console.log(">> AUTH : signin -> ", email, password)
     try {
         const existingUser = await User.findOne({ email });
         if (!existingUser)
@@ -22,6 +23,7 @@ export const signin = async (req, res) => {
 
 export const signup = async (req, res) => {
     const { email, password, confirmPassword, firstName, lastName } = req.body;
+    console.log(">> Signup ", email, firstName, password)
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -31,10 +33,11 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: "Passwords don't match." });
         const encryptedPassword = await bcrypt.hash(password, 12);
         const result = await User.create({ email, password: encryptedPassword, name: `${firstName} ${lastName}` });
+        console.log(" >> creating user : ", result)
         const token = jwt.sign({ name: result.name, email: result.email, id: result._id }, 'test', { expiresIn: "1h" });
         res.status(200).json({ result: result, token: token });
     } catch (error) {
-        return res.status(500).json({ message: "Something went wrong." });
+        return res.status(500).json({ message: error });
     }
 }
 
