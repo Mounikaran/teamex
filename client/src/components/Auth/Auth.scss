@@ -51,4 +51,9 @@
     .MuiGrid-root.MuiGrid-item {
         margin: 5px 0;
     }
+
+    form { 
+        display:grid;
+        gap: 5px;
+    }
 }

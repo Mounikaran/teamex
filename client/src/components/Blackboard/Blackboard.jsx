@@ -34,7 +34,7 @@ const Blackboard = () => {
         const canvas = p5.createCanvas(1920, 1080).parent(canvasParentRef);
         p5.background("rgb(31, 31, 31)");
 
-        socketRef.current = io.connect("https://teams-clone-server.herokuapp.com");
+        socketRef.current = io.connect("http://localhost:5000");
         socketRef.current.emit("join room", {roomID: roomId, username: currentUser.result.name });
 
         socketRef.current.on('mouse', (data) => {

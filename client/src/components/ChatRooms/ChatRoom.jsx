@@ -43,7 +43,7 @@ const ChatRoom = () => {
     }, [dispatch, roomId, type]);
 
     useEffect(() => {
-        socketRef.current = io.connect("https://teams-clone-server.herokuapp.com");
+        socketRef.current = io.connect("http://localhost:5000");
     }, [])
 
     useEffect(() => {
@@ -272,8 +272,7 @@ const ChatRoom = () => {
     } else {
         return (
             <div className="emptychat">
-                <h4>Start discussions with your teams and friends!<br/>Start by creating a new chat or open up an existing chat.</h4>
-                <img src={chatImage} alt="chat page" />
+                <h4>Create new chat or Select existing one !</h4>
             </div>
         )
     }
