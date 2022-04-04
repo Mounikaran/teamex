@@ -71,6 +71,13 @@ function Sidebar() {
                     hoverIcon={chat}
                 />
             </Link>
+            <Link to="/project">
+                <SidebarItem
+                    icon="https://img.icons8.com/ios/50/000000/task.png"
+                    text="Project"
+                    hoverIcon={"https://img.icons8.com/ios-filled/50/000000/task.png"}
+                />
+            </Link>
             {/* {auth ?
                 <Link to="/github">
                     <SidebarItem

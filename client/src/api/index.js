@@ -30,3 +30,17 @@ export const fetchConversations = () => API.get('/conversations');
 export const fetchConversation = (id) => API.get(`/conversations/${id}`);
 export const updateConversation = (value, id) => API.patch(`/conversations/message/${id}`, value);
 export const createConversation = (newConversation) => API.post('/conversations/conversation', newConversation);
+
+// projects API urls
+export const getAllProjects = () => API.get('/projects');
+export const getProjectById = (id)=> API.get(`/projects/project/${id}`);
+export const createProject = (newProject) => API.post('/projects/project', newProject);
+export const updateProject = (id, project) => API.post(`/projects/project/${id}`, project);
+export const deleteProject = (id) => API.delete(`/projects/project/${id}`);
+
+// tasks API urls
+export const getTaskById = (id) => API.get(`/tasks/task/${id}`);
+export const filterTasks = (fields) => API.get(`/tasks/filter`, fields);
+export const updateTask = (id, task) => API.post(`/tasks/task/${id}`, task);
+export const createTask = (newTask) => API.post('/tasks/task', newTask);
+export const deleteTask = (id) => API.delete(`/tasks/task/${id}`);

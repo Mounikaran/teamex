@@ -1,0 +1,29 @@
+.project{
+    display: flex;
+    flex-direction: row;
+}
+.project-section{
+    display: flex;
+    flex-direction: row;
+}
+.project-list-item{
+    padding: 10px;
+    background-color: #dee2e6 !important;
+    cursor: pointer;
+    padding: 10px 15px;
+
+    p{
+        font-weight: 600;
+        margin: auto;
+    }
+
+    &:hover{
+        background: linear-gradient(315deg, hsla(210, 14%, 89%, 1) 0%, hsla(343, 79%, 44%, 1) 74%) !important;
+        color: #f8f9fa;
+    }
+}
+
+.selected {
+    background-color: #800f2f !important;
+    color: #f8f9fa !important;
+}
