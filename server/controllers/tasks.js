@@ -1,6 +1,7 @@
 import Task from '../models/task.js';
 
 export const getTaskById = async (req, res) => {
+    console.log("getTaskById");
     const { id } = req.params;
     try {
         const task = await Task.findById(id);
@@ -11,6 +12,7 @@ export const getTaskById = async (req, res) => {
 }
 
 export const filterTask = async (req, res) => {
+    console.log("filterTask");
     const dataToFilter = req.body;
     try {
         const tasks = await Task.find({ ...dataToFilter });
@@ -21,6 +23,7 @@ export const filterTask = async (req, res) => {
 }
 
 export const createTask = async (req, res) => {
+    console.log("createTask");
     const dataToAdd = req.body;
     try {
         const task = new Task({...dataToAdd});
@@ -32,6 +35,7 @@ export const createTask = async (req, res) => {
 }
 
 export const updateTask = async (req, res) => {
+    console.log("updateTask");
     const { id } = req.params;
     const dataToUpdate = req.body
     try {
@@ -43,6 +47,7 @@ export const updateTask = async (req, res) => {
 }
 
 export const deleteTask = async (req, res) => {
+    console.log("deleteTask");
     const { id } = req.params;
     try {
         await Task.findByIdAndDelete(id);

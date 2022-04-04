@@ -1,11 +1,13 @@
 import Project from "../models/project.js";
 
 export const getProjects = async (req, res) => {
+    console.log("getProjects ", new Date());
     const projects = await Project.find({});
     res.status(200).json(projects);
 }
 
 export const createProject = async (req, res) => {
+    console.log("createProject ", new Date());
     const { title, description } = req.body;
     const project = new Project({ title, description });
     try {
@@ -17,6 +19,7 @@ export const createProject = async (req, res) => {
 }
 
 export const getProjectById = async (req, res) => {
+    console.log("getProjectById ", new Date());
     const { id } = req.params;
     try {
         const project = await Project.findById(id);
@@ -27,6 +30,7 @@ export const getProjectById = async (req, res) => {
 }
 
 export const updateProject = async (req, res) => {
+    console.log("updateProject ", new Date());
     const { id } = req.params;
     const dataToUpdate = req.body;
     try {
@@ -38,6 +42,7 @@ export const updateProject = async (req, res) => {
 }
 
 export const deleteProject = async (req, res) => {
+    console.log("deleteProject ", new Date());
     const { id } = req.params;
     try {
         await Project.findByIdAndDelete(id);
