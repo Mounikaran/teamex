@@ -4,7 +4,7 @@ import User from '../models/user.js';
 
 export const signin = async (req, res) => {
     const { email, password } = req.body;
-    console.log(">> AUTH : signin -> ", email, password)
+    console.log(">> AUTH : signin -> ", email)
     try {
         const existingUser = await User.findOne({ email });
         if (!existingUser)
@@ -38,30 +38,5 @@ export const signup = async (req, res) => {
         res.status(200).json({ result: result, token: token });
     } catch (error) {
         return res.status(500).json({ message: error });
-    }
-}
-
-export const microsoftSignin = async (req, res) => {
-    const { email, name } = req.body;
-    try {
-        const existingUser = await User.findOne({ email });
-        
-        res.status(200).json({ result: existingUser });
-    } catch (error) {
-        return res.status(500).json({ message: "Something went wrong." });
-    }
-}
-
-export const microsoftSignup = async (req, res) => {
-    const { email, name } = req.body;
-    try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return microsoftSignin(req, res);
-        }
-        const result = await User.create({ email: email, name: name });
-        res.status(200).json(result);
-    } catch (error) {
-        return res.status(500).json({ message: "Something went wrong." });
     }
 }
