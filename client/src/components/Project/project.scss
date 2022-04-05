@@ -1,5 +1,22 @@
 .project-header{
     width: 100%;
+    padding: 10px 20px;
+    background-color: #f5f3f4 !important;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+        text-transform: capitalize;
+        color: #2f3e46;
+    }
+    div {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
+.create-project-header{
+    width: 100%;
     padding: 10px;
     background-color: #f5f3f4 !important;
 
@@ -7,5 +24,48 @@
         text-align: center;
         text-transform: capitalize;
         color: #2f3e46;
+    }
+}
+.project-form{
+    margin-top: 20px;
+    padding: 20px 40px;
+    width: 100%;
+    gap: 20px;
+    display: grid;
+    background-color: #f8f9fa !important;
+
+    .project-input {
+        background-color: #edf2fb !important;
+    }
+
+    .button-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+    }
+}
+
+.delete-confirm{
+    width: 100%;
+    padding: 20px 40px;
+
+    .delete-card{
+        padding: 10px;
+
+        p {
+            text-align: center;
+            font-weight: bold;
+            color: #2f3e46;
+
+            span {
+                color : #ef233c;
+            }
+        }
+    }
+    .button-container{
+        display: flex;
+        justify-content: center;
+        padding: 0px 40px;
     }
 }
