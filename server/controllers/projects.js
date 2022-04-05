@@ -7,7 +7,7 @@ export const getProjects = async (req, res) => {
 }
 
 export const createProject = async (req, res) => {
-    console.log("createProject ", new Date());
+    console.log("createProject ", new Date(), req.body);
     const { title, description } = req.body;
     const project = new Project({ title, description });
     try {
