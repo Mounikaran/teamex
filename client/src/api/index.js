@@ -44,3 +44,5 @@ export const filterTasks = (fields) => API.get(`/tasks/filter`, fields);
 export const updateTask = (id, task) => API.post(`/tasks/task/${id}`, task);
 export const createTask = (newTask) => API.post('/tasks/task', newTask);
 export const deleteTask = (id) => API.delete(`/tasks/task/${id}`);
+
+export const fetchTaskStausList = () => API.get('/tasks/status');

@@ -3,29 +3,43 @@ import { Card, IconButton, Paper, TextField, Button } from "@material-ui/core";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
-import { removeProject, fetchTasks } from "../../services/ProjectServices";
+import { removeProject, fetchTasks, getTaskStatusList } from "../../services/ProjectServices";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import { editUpdate } from "../../services/ProjectServices";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 
 import "./project.scss";
+import Tasks from "./Task";
 
 const ProjectDetail = (props) => {
   const { project, setIsDeleted, setIsUpdated } = props;
   const [tasks, setTasks] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
   const [activeEditContent, setActiveEditContent] = useState("TASKS");
+  const [taskStatusList, setTaskStatusList] = useState();
 
   const [newTitle, setNewTitle] = useState(project.title);
   const [newDescription, setNewDescription] = useState(project.description);
 
+  // get tasks status list
+  const fetchTaskStatusList = async () => {
+    const taskStatusList = await getTaskStatusList();
+    setTaskStatusList(taskStatusList.taskStatus);
+  }
+
+  // get tasks
   const fetchTasksAPI = async () => {
     console.log("Getting tasks API");
     const filterData = { projectId: project._id };
     const tasks = await fetchTasks(filterData);
-    setTasks(tasks.data);
+    setTasks(tasks);
   };
+
+  useEffect(()=>{
+    fetchTaskStatusList();
+    console.log(taskStatusList)
+  }, [])
 
   useEffect(() => {
     fetchTasksAPI();
@@ -141,6 +155,12 @@ const ProjectDetail = (props) => {
     </div>
   );
 
+  const tasksContent = (
+    <div className="tasks-content">
+      <Tasks taskStatusList={taskStatusList} tasks={tasks}/>
+    </div>
+  )
+
   const mainContent = (
     <>
       <Paper className="project-header" variant="outlined">
@@ -169,7 +189,7 @@ const ProjectDetail = (props) => {
 
       {activeEditContent === "DELETE" && deleteConfirm}
       {activeEditContent === "UPDATE" && updateForm}
-      {activeEditContent === "TASKS" && ""}
+      {activeEditContent === "TASKS" && tasksContent}
     </>
   );
 

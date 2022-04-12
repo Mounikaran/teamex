@@ -69,3 +69,50 @@
         padding: 0px 40px;
     }
 }
+
+.tasks-content {
+    margin-top: 10px;
+
+    .status-card {
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+
+        &:hover {
+            box-shadow: 2px 2px 4px 3px rgba(204,204,204,1);
+            cursor: pointer;
+        }
+    }
+
+    .active {
+        border: #172a3a solid 2px;
+    }
+
+    .todo {
+        background-color: #edf6f9 !important;
+        color : #212f45;
+    }
+    .inprogress {
+        background-color: #83c5be !important;
+        color: #212f45;
+    }
+    .completed {
+        background-color: #006d77 !important;
+        color: #f8f9fa;
+    }
+    .onhold {
+        background-color: #6c757d !important;
+        color: #f8f9fa;
+    }
+
+    .task-card {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        &:hover {
+            box-shadow: 2px 2px 4px 2px rgba(204,204,204,1);
+            cursor: pointer;
+        }
+    }
+}

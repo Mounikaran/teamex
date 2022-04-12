@@ -5,7 +5,8 @@ import {
     getProjectById,
     createProject,
     updateProject,
-    deleteProject
+    deleteProject,
+    fetchTaskStausList
 } from '../api/index'
 
 export const fetchAllProjects = async () => {
@@ -43,6 +44,18 @@ export const fetchTasks = async (filterData) => {
     console.log("Getting tasks API")
     const tasks = await filterTasks(filterData)
     return tasks.data
+}
+
+export const getTaskStatusList = async () => {
+    console.log("Getting task status list API")
+    const taskStatusList = await fetchTaskStausList()
+    return taskStatusList.data
+}
+
+export const fetchTaskwithFilter = async (filterData) => {
+    console.log("Gettiing Tasks API : ", filterData);
+    const tasks = await filterTasks(filterData);
+    return tasks.data;
 }
 
 
