@@ -1,4 +1,5 @@
 import Task from '../models/task.js';
+import { TASK_STATUS } from '../utils/constants.js'
 
 export const getTaskById = async (req, res) => {
     console.log("getTaskById");
@@ -55,4 +56,9 @@ export const deleteTask = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
+}
+
+export const getTaskStatus = async (req, res) => {
+    console.log("getTaskStatus");
+    res.status(200).json({taskStatus : TASK_STATUS});
 }
