@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import User from './user.js';
 
 const taskSchema = mongoose.Schema({
     title: {
@@ -10,10 +11,14 @@ const taskSchema = mongoose.Schema({
         required: true
     },
     projectId: {
-        type: String,
-        required: true
+        type:  mongoose.Schema.Types.ObjectId,
+        ref: 'Project'
     },
     assignedTo: {
+        type:  mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    ownerName: {
         type: String,
     },
     status: {
@@ -25,8 +30,8 @@ const taskSchema = mongoose.Schema({
         default: true
     },
     priority: {
-        type: String,
-        default: 'LOW'
+        type: Number,
+        default: 0
     },
     comment: {
         type: String,

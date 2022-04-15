@@ -1,4 +1,5 @@
 import Task from '../models/task.js';
+import User from '../models/user.js';
 import { TASK_STATUS } from '../utils/constants.js'
 
 export const getTaskById = async (req, res) => {
@@ -13,10 +14,10 @@ export const getTaskById = async (req, res) => {
 }
 
 export const filterTask = async (req, res) => {
-    console.log("filterTask");
-    const dataToFilter = req.body;
+    console.log("filterTask", req.body);
+    const filterData = req.body;
     try {
-        const tasks = await Task.find({ ...dataToFilter });
+        const tasks = await Task.find({...filterData});
         res.status(200).json(tasks);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -26,6 +27,11 @@ export const filterTask = async (req, res) => {
 export const createTask = async (req, res) => {
     console.log("createTask");
     const dataToAdd = req.body;
+    if(dataToAdd.assignedTo) {
+        const user = await User.findById(dataToAdd.assignedTo);
+        if(user)
+            dataToAdd.ownerName = user.name;
+    }
     try {
         const task = new Task({...dataToAdd});
         await task.save();
@@ -39,6 +45,9 @@ export const updateTask = async (req, res) => {
     console.log("updateTask");
     const { id } = req.params;
     const dataToUpdate = req.body
+    if(dataToUpdate.assignedTo) {
+        dataToUpdate.ownerName = dataToUpdate.assignedTo.name;
+    }
     try {
         const task = await Task.findByIdAndUpdate(id, {...dataToUpdate}, { new: true });
         res.status(200).json(task);
