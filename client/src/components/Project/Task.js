@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Paper, Grid } from "@material-ui/core";
+import { Paper, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
 const Tasks = (props) => {
     const { taskStatusList, tasks } = props;
 
     const [selectedStatusTasks, setSelectedStatusTasks] = useState([]);
-    const [selectedStatus, setSelectedStatus] = useState("toDo");
+    const [selectedStatus, setSelectedStatus] = useState();
+
+    const priorityText = {
+        0: "Low",
+        1: "Medium",
+        2: "High",
+    }
 
     const handleStatusChange = (status) => {
-        const selectedStatusTasks = tasks.filter((task) => task.status === status.toUpperCase());
+        const selectedStatusTasks = tasks.filter((task) => task.status.toUpperCase() === status.toUpperCase());
         setSelectedStatus(status);
         setSelectedStatusTasks(selectedStatusTasks);
     }
-
-    useEffect(() => {
-        handleStatusChange("ToDo");
-    }, [])
 
     const taskStatusJSX = taskStatusList && (
         <Grid container spacing={3}>
@@ -43,21 +45,32 @@ const Tasks = (props) => {
         )
 
     const taskListJSX = (
-        <Grid container spacing={3}>
-            {selectedStatusTasks && selectedStatusTasks.map((task) => (
-                <Grid item xs={12}>
-                    <Paper variant="outlined" className="task-card">
-                        <div>
-                        {task.title}
-                        </div>
-                        <div>
-                            delete
-                            edit
-                        </div>
-                    </Paper>
-                </Grid>
-            ))}
-        </Grid>
+        <div className="tasks-content">
+        <TableContainer component={Paper}>
+            <Table aria-label="task table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Title</TableCell>
+                        <TableCell>Status</TableCell>
+                        <TableCell>Assignee</TableCell>
+                        <TableCell>Priority</TableCell>
+                        <TableCell></TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {selectedStatusTasks && selectedStatusTasks.map((task) => (
+                        <TableRow key={task.id}>
+                            <TableCell>{task.title}</TableCell>
+                            <TableCell>{task.status} (editable)</TableCell>
+                            <TableCell>{task.ownerName ? task.ownerName : '-'}</TableCell>
+                            <TableCell>{priorityText[task.priority]}</TableCell>
+                            <TableCell>view, edit, delete</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+        </div>
     )
 
 

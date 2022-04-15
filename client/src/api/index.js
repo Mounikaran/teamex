@@ -40,7 +40,10 @@ export const deleteProject = (id) => API.delete(`/projects/project/${id}`);
 
 // tasks API urls
 export const getTaskById = (id) => API.get(`/tasks/task/${id}`);
-export const filterTasks = (fields) => API.get(`/tasks/filter`, fields);
+export const filterTasks = (fields) => {
+    console.log("filterTasks API", fields);
+    return API.get(`/tasks/filter`, fields);
+}
 export const updateTask = (id, task) => API.post(`/tasks/task/${id}`, task);
 export const createTask = (newTask) => API.post('/tasks/task', newTask);
 export const deleteTask = (id) => API.delete(`/tasks/task/${id}`);

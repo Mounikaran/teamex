@@ -30,9 +30,10 @@ const ProjectDetail = (props) => {
 
   // get tasks
   const fetchTasksAPI = async () => {
-    console.log("Getting tasks API");
+    console.log("Getting tasks API", project._id);
     const filterData = { projectId: project._id };
     const tasks = await fetchTasks(filterData);
+    console.log("tasks : ", tasks)
     setTasks(tasks);
   };
 
@@ -42,6 +43,7 @@ const ProjectDetail = (props) => {
   }, [])
 
   useEffect(() => {
+    setTasks(null);
     fetchTasksAPI();
     setShowAlert(false);
   }, [project]);

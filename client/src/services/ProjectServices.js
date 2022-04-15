@@ -41,7 +41,7 @@ export const fetchProject = async (id) => {
 }
 
 export const fetchTasks = async (filterData) => {
-    console.log("Getting tasks API")
+    console.log("Getting tasks API", filterData)
     const tasks = await filterTasks(filterData)
     return tasks.data
 }
