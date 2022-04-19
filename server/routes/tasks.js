@@ -10,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.get("/filter", filterTask);
+router.post("/filter", filterTask);
 router.get("/task/:id", getTaskById);
 router.post("/task", createTask);
 router.post("/task/:id", updateTask);
