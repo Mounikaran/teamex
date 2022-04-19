@@ -3,7 +3,10 @@ import { Card, IconButton, Paper, TextField, Button } from "@material-ui/core";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
-import { removeProject, fetchTasks, getTaskStatusList } from "../../services/ProjectServices";
+import {
+  removeProject,
+  getTaskStatusList,
+} from "../../services/ProjectServices";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import { editUpdate } from "../../services/ProjectServices";
@@ -13,40 +16,13 @@ import "./project.scss";
 import Tasks from "./Task";
 
 const ProjectDetail = (props) => {
-  const { project, setIsDeleted, setIsUpdated } = props;
-  const [tasks, setTasks] = useState([]);
+  const { project, setIsDeleted, setIsUpdated, projectTasks, taskStatusList, updateTask } =
+    props;
   const [showAlert, setShowAlert] = useState(false);
   const [activeEditContent, setActiveEditContent] = useState("TASKS");
-  const [taskStatusList, setTaskStatusList] = useState();
 
   const [newTitle, setNewTitle] = useState(project.title);
   const [newDescription, setNewDescription] = useState(project.description);
-
-  // get tasks status list
-  const fetchTaskStatusList = async () => {
-    const taskStatusList = await getTaskStatusList();
-    setTaskStatusList(taskStatusList.taskStatus);
-  }
-
-  // get tasks
-  const fetchTasksAPI = async () => {
-    console.log("Getting tasks API", project._id);
-    const filterData = { projectId: project._id };
-    const tasks = await fetchTasks(filterData);
-    console.log("tasks : ", tasks)
-    setTasks(tasks);
-  };
-
-  useEffect(()=>{
-    fetchTaskStatusList();
-    console.log(taskStatusList)
-  }, [])
-
-  useEffect(() => {
-    setTasks(null);
-    fetchTasksAPI();
-    setShowAlert(false);
-  }, [project]);
 
   const handleHeaderBtnClick = (activeTab) => {
     setActiveEditContent(activeTab);
@@ -79,7 +55,7 @@ const ProjectDetail = (props) => {
 
   const handleCancel = () => {
     console.log("Cancel clicked");
-    handleHeaderBtnClick("");
+    handleHeaderBtnClick("TASKS");
   };
 
   const deleteConfirm = (
@@ -159,9 +135,9 @@ const ProjectDetail = (props) => {
 
   const tasksContent = (
     <div className="tasks-content">
-      <Tasks taskStatusList={taskStatusList} tasks={tasks}/>
+      <Tasks taskStatusList={taskStatusList} tasks={projectTasks} updateTask={updateTask} />
     </div>
-  )
+  );
 
   const mainContent = (
     <>

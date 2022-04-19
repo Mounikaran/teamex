@@ -2,6 +2,7 @@ import React from 'react';
 import {
     getAllProjects,
     filterTasks,
+    updateTask,
     getProjectById,
     createProject,
     updateProject,
@@ -44,6 +45,12 @@ export const fetchTasks = async (filterData) => {
     console.log("Getting tasks API", filterData)
     const tasks = await filterTasks(filterData)
     return tasks.data
+}
+
+export const editTask = async (id, task) => {
+    console.log("Calling updateTask API", task)
+    const updateResp = await updateTask(id, task)
+    return updateResp
 }
 
 export const getTaskStatusList = async () => {
