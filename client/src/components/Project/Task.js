@@ -10,7 +10,9 @@ import {
   TableRow,
   Select,
   MenuItem,
+  IconButton
 } from "@material-ui/core";
+import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
 
 const Tasks = (props) => {
   const { taskStatusList, tasks, updateTask } = props;
@@ -47,6 +49,10 @@ const Tasks = (props) => {
       console.log("Task updated successfully");
       setSelectedStatusTasks(selectedStatusTasks.filter((task) => task._id !== taskId));
     }
+  };
+
+  const handleTaskDetailClick = async (taskId) => {
+    console.log("Task detail clicked", taskId);
   };
 
   const taskStatusJSX = taskStatusList && (
@@ -110,7 +116,7 @@ const Tasks = (props) => {
     <div className="tasks-content">
       <TableContainer component={Paper}>
         <Table aria-label="task table">
-          <TableHead>
+          <TableHead className="table-head">
             <TableRow>
               <TableCell>Title</TableCell>
               <TableCell>Status</TableCell>
@@ -134,22 +140,26 @@ const Tasks = (props) => {
                       }}
                     >
                       <MenuItem value={taskStatusList.TODO}>
-                        {taskStatusList.TODO}
+                        <span className={`status-text-todo`}>{taskStatusList.TODO}</span>
                       </MenuItem>
                       <MenuItem value={taskStatusList.IN_PROGRESS}>
-                        {taskStatusList.IN_PROGRESS}
+                      <span className={`status-text-inprogress`}>{taskStatusList.IN_PROGRESS}</span>
                       </MenuItem>
                       <MenuItem value={taskStatusList.COMPLETED}>
-                        {taskStatusList.COMPLETED}
+                      <span className={`status-text-completed`}>{taskStatusList.COMPLETED}</span>
                       </MenuItem>
                       <MenuItem value={taskStatusList.ON_HOLD}>
-                        {taskStatusList.ON_HOLD}
+                      <span className={`status-text-onhold`}>{taskStatusList.ON_HOLD}</span>
                       </MenuItem>
                     </Select>
                   </TableCell>
                   <TableCell>{task.ownerName ? task.ownerName : "-"}</TableCell>
-                  <TableCell>{priorityText[task.priority]}</TableCell>
-                  <TableCell>view, edit, delete</TableCell>
+                  <TableCell><span className={`priority-${priorityText[task.priority]}`}>{priorityText[task.priority]}</span></TableCell>
+                  <TableCell>
+                    <IconButton onClick={ () => {handleTaskDetailClick(task._id)} }>
+                      <KeyboardArrowRightRoundedIcon />
+                      </IconButton>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>

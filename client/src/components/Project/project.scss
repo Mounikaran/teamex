@@ -115,4 +115,50 @@
             cursor: pointer;
         }
     }
+
+    .table-head {
+        background-color: #ced4da !important;
+    }
+
+    .status-text-todo {
+        color : #06d6a0 !important;
+        font-weight: bold !important;
+    }
+    .status-text-inprogress {
+        color: #118ab2 !important;
+        font-weight: bold !important;
+    }
+    .status-text-onhold {
+        color: #073b4c !important;
+        font-weight: bold !important;
+    }
+    .status-text-completed {
+        color: #70e000 !important;
+        font-weight: bold !important;
+    }
+
+    .priority-Low {
+        color: #06d6a0 !important;
+        background-color: #d8f3dc !important;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border-radius: 3px;
+        padding: 3px 5px;
+    }
+    .priority-Medium {
+        color: #457b9d !important;
+        background-color: #edf2f4 !important;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border-radius: 3px;
+        padding: 3px 5px;
+    }
+    .priority-High {
+        color: #c9184a !important;
+        background-color: #ffccd5 !important;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border-radius: 3px;
+        padding: 3px 5px;
+    }
 }
