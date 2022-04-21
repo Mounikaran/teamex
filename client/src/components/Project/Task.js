@@ -14,11 +14,18 @@ import {
 } from "@material-ui/core";
 import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
 
+import TaskDetail from "./TaskDetail";
+
+
 const Tasks = (props) => {
   const { taskStatusList, tasks, updateTask } = props;
 
   const [selectedStatusTasks, setSelectedStatusTasks] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState();
+  const [selectedTask, setSelectedTask] = useState();
+
+
+  const [activeTAB, setActiveTAB] = useState("LIST");
 
   const priorityText = {
     0: "Low",
@@ -50,9 +57,14 @@ const Tasks = (props) => {
       setSelectedStatusTasks(selectedStatusTasks.filter((task) => task._id !== taskId));
     }
   };
-
-  const handleTaskDetailClick = async (taskId) => {
-    console.log("Task detail clicked", taskId);
+  
+  const toggleTaskDetailAndList = (tabToActive) => {
+    setActiveTAB(tabToActive);
+  }
+  
+  const handleTaskDetailClick = async (task, tabToActive='LIST') => {
+    toggleTaskDetailAndList(tabToActive);
+    setSelectedTask(task);
   };
 
   const taskStatusJSX = taskStatusList && (
@@ -156,7 +168,7 @@ const Tasks = (props) => {
                   <TableCell>{task.ownerName ? task.ownerName : "-"}</TableCell>
                   <TableCell><span className={`priority-${priorityText[task.priority]}`}>{priorityText[task.priority]}</span></TableCell>
                   <TableCell>
-                    <IconButton onClick={ () => {handleTaskDetailClick(task._id)} }>
+                    <IconButton onClick={ () => {handleTaskDetailClick(task, 'DETAIL')} }>
                       <KeyboardArrowRightRoundedIcon />
                       </IconButton>
                   </TableCell>
@@ -171,7 +183,14 @@ const Tasks = (props) => {
   return (
     <>
       {taskStatusJSX}
+      {activeTAB === "LIST" && (
       <div className="task-list">{taskListJSX}</div>
+      )}
+      {activeTAB === "DETAIL" && (
+        <div className="task-detail">
+          <TaskDetail task={selectedTask} priorityText={priorityText} taskStatusList={taskStatusList} toggleTaskDetailAndList={toggleTaskDetailAndList} />
+          </div>
+          )}
     </>
   );
 };

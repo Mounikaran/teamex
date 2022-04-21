@@ -162,3 +162,44 @@
         padding: 3px 5px;
     }
 }
+
+.task-detail{
+
+    padding: 20px 2px;
+
+    .task-header {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #f5f3f4 !important;
+        display: flex;
+        justify-content: space-between;
+
+        h4 {
+            text-transform: capitalize;
+            color: #2f3e46;
+        }
+        div {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    .task-body {
+        padding: 10px;
+        display: flex;
+        
+        .task-field{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            p{
+                text-transform: capitalize;
+                color: #2f3e46;
+                align-self: center;
+            }
+        }
+    }
+
+}
