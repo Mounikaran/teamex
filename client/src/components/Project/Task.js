@@ -10,12 +10,11 @@ import {
   TableRow,
   Select,
   MenuItem,
-  IconButton
+  IconButton,
 } from "@material-ui/core";
-import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
-
+import KeyboardArrowRightRoundedIcon from "@material-ui/icons/KeyboardArrowRightRounded";
+import { useSelector } from "react-redux";
 import TaskDetail from "./TaskDetail";
-
 
 const Tasks = (props) => {
   const { taskStatusList, tasks, updateTask } = props;
@@ -23,7 +22,18 @@ const Tasks = (props) => {
   const [selectedStatusTasks, setSelectedStatusTasks] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState();
   const [selectedTask, setSelectedTask] = useState();
+  const [taskUpdated, setTaskUpdated] = useState(false);
+  const users = useSelector((state) => state.users);
 
+  const [options, setOptions] = useState([]);
+
+  const getOptions = () => {
+    if (users){
+      users.forEach(user => {
+        setOptions(prevOptions => [...prevOptions, { value: user._id, label: user.name }]);
+      });
+    }
+  }
 
   const [activeTAB, setActiveTAB] = useState("LIST");
 
@@ -34,12 +44,20 @@ const Tasks = (props) => {
   };
 
   useEffect(() => {
+    getOptions();
     if (taskStatusList) {
       setSelectedStatus(taskStatusList.TODO);
       handleStatusChange(taskStatusList.TODO);
       console.log("running useEffect in tasks");
     }
   }, []);
+
+  useEffect(() => {
+    if(taskUpdated){
+      toggleTaskDetailAndList('LIST');
+      setTaskUpdated(false);
+    }
+  }, [taskUpdated]);
 
   const handleStatusChange = (status) => {
     const selectedStatusTasks = tasks.filter(
@@ -52,17 +70,19 @@ const Tasks = (props) => {
   const handleTaskStatusChange = async (taskId, status) => {
     let newTask = { status: status };
     const updateResp = await updateTask(taskId, newTask);
-    if(updateResp.status === 200) {
+    if (updateResp.status === 200) {
       console.log("Task updated successfully");
-      setSelectedStatusTasks(selectedStatusTasks.filter((task) => task._id !== taskId));
+      setSelectedStatusTasks(
+        selectedStatusTasks.filter((task) => task._id !== taskId)
+      );
     }
   };
-  
+
   const toggleTaskDetailAndList = (tabToActive) => {
     setActiveTAB(tabToActive);
-  }
-  
-  const handleTaskDetailClick = async (task, tabToActive='LIST') => {
+  };
+
+  const handleTaskDetailClick = async (task, tabToActive = "LIST") => {
     toggleTaskDetailAndList(tabToActive);
     setSelectedTask(task);
   };
@@ -132,7 +152,7 @@ const Tasks = (props) => {
             <TableRow>
               <TableCell>Title</TableCell>
               <TableCell>Status</TableCell>
-              <TableCell>Assignee</TableCell>
+              <TableCell>Assigned To</TableCell>
               <TableCell>Priority</TableCell>
               <TableCell></TableCell>
             </TableRow>
@@ -152,25 +172,41 @@ const Tasks = (props) => {
                       }}
                     >
                       <MenuItem value={taskStatusList.TODO}>
-                        <span className={`status-text-todo`}>{taskStatusList.TODO}</span>
+                        <span className={`status-text-todo`}>
+                          {taskStatusList.TODO}
+                        </span>
                       </MenuItem>
                       <MenuItem value={taskStatusList.IN_PROGRESS}>
-                      <span className={`status-text-inprogress`}>{taskStatusList.IN_PROGRESS}</span>
+                        <span className={`status-text-inprogress`}>
+                          {taskStatusList.IN_PROGRESS}
+                        </span>
                       </MenuItem>
                       <MenuItem value={taskStatusList.COMPLETED}>
-                      <span className={`status-text-completed`}>{taskStatusList.COMPLETED}</span>
+                        <span className={`status-text-completed`}>
+                          {taskStatusList.COMPLETED}
+                        </span>
                       </MenuItem>
                       <MenuItem value={taskStatusList.ON_HOLD}>
-                      <span className={`status-text-onhold`}>{taskStatusList.ON_HOLD}</span>
+                        <span className={`status-text-onhold`}>
+                          {taskStatusList.ON_HOLD}
+                        </span>
                       </MenuItem>
                     </Select>
                   </TableCell>
-                  <TableCell>{task.ownerName ? task.ownerName : "-"}</TableCell>
-                  <TableCell><span className={`priority-${priorityText[task.priority]}`}>{priorityText[task.priority]}</span></TableCell>
+                  <TableCell>{task.assignedName ? task.assignedName : "-"}</TableCell>
                   <TableCell>
-                    <IconButton onClick={ () => {handleTaskDetailClick(task, 'DETAIL')} }>
+                    <span className={`priority-${priorityText[task.priority]}`}>
+                      {priorityText[task.priority]}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    <IconButton
+                      onClick={() => {
+                        handleTaskDetailClick(task, "DETAIL");
+                      }}
+                    >
                       <KeyboardArrowRightRoundedIcon />
-                      </IconButton>
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -183,14 +219,21 @@ const Tasks = (props) => {
   return (
     <>
       {taskStatusJSX}
-      {activeTAB === "LIST" && (
-      <div className="task-list">{taskListJSX}</div>
-      )}
+      {activeTAB === "LIST" && <div className="task-list">{taskListJSX}</div>}
       {activeTAB === "DETAIL" && (
         <div className="task-detail">
-          <TaskDetail task={selectedTask} priorityText={priorityText} taskStatusList={taskStatusList} toggleTaskDetailAndList={toggleTaskDetailAndList} />
-          </div>
-          )}
+          <TaskDetail
+            task={selectedTask}
+            priorityText={priorityText}
+            taskStatusList={taskStatusList}
+            toggleTaskDetailAndList={toggleTaskDetailAndList}
+            updateTask={updateTask}
+            users={users ? users : []}
+            options = {options}
+            setTaskUpdated={setTaskUpdated}
+          />
+        </div>
+      )}
     </>
   );
 };

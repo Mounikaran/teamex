@@ -18,7 +18,14 @@ const taskSchema = mongoose.Schema({
         type:  mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    ownerName: {
+    assignedName: {
+        type: String,
+    },
+    createdBy: {
+        type:  mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    createdByName: {
         type: String,
     },
     status: {

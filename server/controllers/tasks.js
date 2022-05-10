@@ -30,7 +30,7 @@ export const createTask = async (req, res) => {
     if(dataToAdd.assignedTo) {
         const user = await User.findById(dataToAdd.assignedTo);
         if(user)
-            dataToAdd.ownerName = user.name;
+            dataToAdd.assignedName = user.name;
     }
     try {
         const task = new Task({...dataToAdd});
@@ -45,9 +45,6 @@ export const updateTask = async (req, res) => {
     console.log("updateTask", req.body);
     const { id } = req.params;
     const dataToUpdate = req.body
-    if(dataToUpdate.assignedTo) {
-        dataToUpdate.ownerName = dataToUpdate.assignedTo.name;
-    }
     try {
         const task = await Task.findByIdAndUpdate(id, {...dataToUpdate}, { new: true });
         res.status(200).json(task);

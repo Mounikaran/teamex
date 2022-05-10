@@ -3,6 +3,7 @@ import {
     getAllProjects,
     filterTasks,
     updateTask,
+    createTask,
     getProjectById,
     createProject,
     updateProject,
@@ -51,6 +52,12 @@ export const editTask = async (id, task) => {
     console.log("Calling updateTask API", task)
     const updateResp = await updateTask(id, task)
     return updateResp
+}
+
+export const addTask = async (task) => {
+    console.log("Calling createTask API", task)
+    const createResp = await createTask(task)
+    return createResp
 }
 
 export const getTaskStatusList = async () => {

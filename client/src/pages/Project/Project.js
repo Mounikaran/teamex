@@ -59,6 +59,13 @@ const Project = () => {
     return updateResp;
   }
 
+  // create task
+  const createTaskAPI = async (task) => {
+    const createResp = await projectService.addTask(task);
+    return createResp;
+  }
+
+
   useEffect(() => {
     if(isTaskUpdated) {
       setTasks(null)
@@ -138,6 +145,7 @@ const Project = () => {
                   setIsUpdated={setIsProjectUpdated}
                   taskStatusList={taskStatusList}
                   updateTask={updateTaskAPI}
+                  createTask={createTaskAPI}
                 />
               </div>
             )}
